@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { stringify } = require('querystring');
 
-const cartSchema = new mpongoose.Schema({
+const cartSchema = new mongoose.Schema({
     userId : {
         type : String,
         required : true
@@ -30,4 +30,4 @@ const cartSchema = new mpongoose.Schema({
 
 const Cart = mongoose.model('Cart',cartSchema);
 
-mpodule.exports = Cart;
+module.exports = Cart;

@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 //routes
 const userRoutes = require('./route/user/userRoutes');
 const productRoutes = require('./route/product/productRoutes');
+const cartRoutes = require('./route/cart/cartRoutes');
 
 
 //connect mongodb
@@ -24,6 +25,7 @@ require('./config/DbConnect/dbConnect');
 //using all routes
 app.use('/',userRoutes);
 app.use('/',productRoutes);
+app.use('/',cartRoutes);
 
 
 const PORT = process.env.port || 3000;
