@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 const userRoutes = require('./route/user/userRoutes');
 const productRoutes = require('./route/product/productRoutes');
 const cartRoutes = require('./route/cart/cartRoutes');
+const orderRoutes = require('./route/order/orderRoutes');
+const stripeRoutes = require('./route/stripe/stripeRoutes');
 
 
 //connect mongodb
@@ -26,6 +28,8 @@ require('./config/DbConnect/dbConnect');
 app.use('/',userRoutes);
 app.use('/',productRoutes);
 app.use('/',cartRoutes);
+app.use('/',orderRoutes);
+app.use('/',stripeRoutes);
 
 
 const PORT = process.env.port || 3000;

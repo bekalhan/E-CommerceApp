@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderSchema = new mpongoose.Schema({
+const orderSchema = new mongoose.Schema({
     userId : {
         type : String,
         required : true
@@ -41,4 +41,4 @@ const orderSchema = new mpongoose.Schema({
 
 const Order = mongoose.model('Order',orderSchema);
 
-mpodule.exports = Order;
+module.exports = Order;
