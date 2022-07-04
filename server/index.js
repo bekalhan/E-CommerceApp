@@ -14,12 +14,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 //routes
+const userRoutes = require('./route/user/userRoutes');
+const productRoutes = require('./route/product/productRoutes');
 
 
 //connect mongodb
 require('./config/DbConnect/dbConnect');
 
 //using all routes
+app.use('/',userRoutes);
+app.use('/',productRoutes);
 
 
 const PORT = process.env.port || 3000;

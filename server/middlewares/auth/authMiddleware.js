@@ -1,6 +1,6 @@
 const expressAsyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
-const User = require('../../model/user/User');
+const User = require('../../model/User/userSchema');
 
 const authmiddleware = expressAsyncHandler(async (req,res,next)=>{
     let token;
@@ -18,6 +18,27 @@ const authmiddleware = expressAsyncHandler(async (req,res,next)=>{
             throw new Error("not authorized");
         }
     }
-})
+});
 
-module.exports = authmiddleware;
+
+const verifyTokenAndAuthorization = (req, res, next) => {
+    verifyToken(req, res, () => {
+      if (req.user.id === req.params.id || req.user.isAdmin) {
+        next();
+      } else {
+        res.status(403).json("You are not alowed to do that!");
+      }
+    });
+  };
+  
+  const verifyTokenAndAdmin = (req, res, next) => {
+    verifyToken(req, res, () => {
+      if (req.user.isAdmin) {
+        next();
+      } else {
+        res.status(403).json("You are not alowed to do that!");
+      }
+    });
+  };
+
+module.exports = {authmiddleware,verifyTokenAndAdmin,verifyTokenAndAuthorization};

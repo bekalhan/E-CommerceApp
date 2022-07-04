@@ -1,14 +1,23 @@
 const express = require('express');
-const userRoutes = express.Router();
-const authmiddleware = require('../../middlewares/auth/authMiddleware');
-const {userRegisterCtrl,userLoginCtrl} = require('../../controller/User/userCtrl');
+const usersRoutes = express.Router();
+const {userRegisterCtrl,userLoginCtrl,updateUserCtrl,deleteUserCtrl,getUserCtrl,getUserStatsCtrl,getAllUsersCtrl} = require('../../controller/User/userCtrl');
+const {authmiddleware,verifyTokenAndAdmin,verifyTokenAndAuthorization} = require('../../middlewares/auth/authmiddleware');
+
 
 //post request
-userRoutes.post('/api/users-register',userRegisterCtrl);
-userRoutes.post('/api/users-login',userLoginCtrl);
+usersRoutes.post('/api/users-register',userRegisterCtrl);
+usersRoutes.post('/api/users-login',userLoginCtrl);
+
+//put request
+usersRoutes.put('/api/users-update/:id',authmiddleware,updateUserCtrl);
+
+//delete request
+usersRoutes.delete('/api/users-delete/:id',authmiddleware,deleteUserCtrl);
+
+//get request
+usersRoutes.get('/api/user/:id',authmiddleware,getUserCtrl);
+usersRoutes.get('/api/users',authmiddleware,getAllUsersCtrl);
+usersRoutes.get('/api/user/stats',authmiddleware,getUserStatsCtrl);
 
 
-
-
-
-module.exports = userRoutes;
+module.exports = usersRoutes;
